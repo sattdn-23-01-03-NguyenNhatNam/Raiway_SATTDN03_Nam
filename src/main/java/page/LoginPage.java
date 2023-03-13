@@ -24,7 +24,7 @@ public class LoginPage {
         return Constant.WEBDRIVER.findElement(btnLogin);
     }
 
-    public WebElement getMessageWelcome() {
+    public WebElement getMsgWelcome() {
         return Constant.WEBDRIVER.findElement(msgWelcome);
     }
 
@@ -32,7 +32,7 @@ public class LoginPage {
         return Constant.WEBDRIVER.findElement(msgErrorLoginForm);
     }
 
-    public WebElement getMessageErrorValidField() {
+    public WebElement getMsgErrorInvalidField() {
         return Constant.WEBDRIVER.findElement(msgErrorValidField);
     }
 
@@ -48,16 +48,16 @@ public class LoginPage {
         getBtnLogin().click();
     }
 
-    public String showMessageWelcome() {
-        return getMessageWelcome().getText();
+    public String getTextMsgWelcome() {
+        return getMsgWelcome().getText();
     }
 
-    public String getTextMessageErrorLogin() {
+    public String getTextMsgErrorLogin() {
         return getMsgErrorLoginForm().getText();
     }
 
-    public String getTextMessageErrorValidField() {
-        return getMessageErrorValidField().getText();
+    public String getTextMsgErrorInvalidField() {
+        return getMsgErrorInvalidField().getText();
     }
 
     public void loginWithInvalidAccountSeveralTimes(int times, String email, String password) {

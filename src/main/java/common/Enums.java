@@ -5,7 +5,7 @@ public enum Enums {
     Register("Register"),
     BookTicketPage("BookTicketPage"),
     Logout("Logout"),
-    ManageTicket("ManageTicket"),
+    MyTicket("ManageTicket"),
     ChangePassword("ChangePassword"),
 
     CurrentPassword("currentPassword"),

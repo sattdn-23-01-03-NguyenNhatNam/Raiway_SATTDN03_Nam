@@ -17,7 +17,7 @@ public class ChangePasswordTest extends BaseTest {
         homePage.open();
         homePage.clickOnTabLogin();
         loginPage.login(Constant.Username, Constant.Password);
-        homePage.clickOnTabChangPassword();
+        homePage.clickOnTabChangePassword();
         changePassword.changePassword(Constant.Password, "12345678", "12345678");
 
         Assert.assertEquals(changePassword.getTextMsgSuccess(), "Your password has been updated");

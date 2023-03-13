@@ -16,7 +16,7 @@ public class RegisterTest extends BaseTest {
 
     @Test(description = "User can login Railway with registered username and password")
     public void TC00() {
-        String email = "nhatnam"+ Utilities.randomNumber(20,100)+"@gmail.com";
+        String email = "nhatnam" + Utilities.randomNumber(20, 100) + "@gmail.com";
         String password = "12345678";
         String confirmPassword = password;
         String passportNumber = "123123123";
@@ -35,7 +35,7 @@ public class RegisterTest extends BaseTest {
     public void TC07() {
         homePage.open();
         homePage.clickOnTabRegister();
-        registerPage.register("nam"+ Utilities.randomNumber(10,1000) +"@gmail.com", "123456789", "123456789", "123123123");
+        registerPage.register("nam" + Utilities.randomNumber(10, 1000) + "@gmail.com", "123456789", "123456789", "123123123");
         String actualMsg = registerPage.getTextMsgSuccess();
 
         Assert.assertEquals(actualMsg, "Thank you for registering your account", "Register failure, Account already exists");
@@ -50,7 +50,7 @@ public class RegisterTest extends BaseTest {
         registerPage.register("nam6@gmail.com", password, confirmPassword, "123123123");
 
         softAssert.assertEquals(registerPage.getTextMsgErrorRegister(), "There're errors in the form. Please correct the errors and try again.", "The error message doesn't display properly");
-        softAssert.assertEquals(registerPage.getTextMsgErrorConfirmPassword(), "The two passwords do not match","The error message doesn't display properly");
+        softAssert.assertEquals(registerPage.getTextMsgErrorConfirmPassword(), "The two passwords do not match", "The error message doesn't display properly");
         softAssert.assertAll();
     }
 
@@ -61,9 +61,9 @@ public class RegisterTest extends BaseTest {
         registerPage.register("nam7@gmail.com", "", "123456789", "");
 
         softAssert.assertEquals(registerPage.getTextMsgErrorRegister(), "There're errors in the form. Please correct the errors and try again.", "The error message doesn't display properly");
-        softAssert.assertEquals(registerPage.getTextMsgErrorInValidPassword(), "Invalid password length.","The error message doesn't display properly");
-        softAssert.assertEquals(registerPage.getTextMsgErrorConfirmPassword(), "The two passwords do not match","The error message doesn't display properly");
-        softAssert.assertEquals(registerPage.getTextMsgErrorInValidPID(), "Invalid ID length.","The error message doesn't display properly");
+        softAssert.assertEquals(registerPage.getTextMsgErrorInValidPassword(), "Invalid password length.", "The error message doesn't display properly");
+        softAssert.assertEquals(registerPage.getTextMsgErrorConfirmPassword(), "The two passwords do not match", "The error message doesn't display properly");
+        softAssert.assertEquals(registerPage.getTextMsgErrorInValidPID(), "Invalid ID length.", "The error message doesn't display properly");
         softAssert.assertAll();
     }
 }

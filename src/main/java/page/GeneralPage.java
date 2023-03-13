@@ -29,7 +29,7 @@ public class GeneralPage {
     }
 
     public WebElement getTabMyTicket() {
-        return Constant.WEBDRIVER.findElement(getTabGeneral(Enums.ManageTicket.getValue()));
+        return Constant.WEBDRIVER.findElement(getTabGeneral(Enums.MyTicket.getValue()));
     }
 
     public WebElement getChangePassword() {
@@ -52,7 +52,7 @@ public class GeneralPage {
         getTabLogout().click();
     }
 
-    public void clickOnTabChangPassword() {
+    public void clickOnTabChangePassword() {
         getChangePassword().click();
     }
 }

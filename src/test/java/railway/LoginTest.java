@@ -3,6 +3,7 @@ package railway;
 import common.Constant;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import page.ChangePasswordPage;
 import page.GeneralPage;
 import page.HomePage;
@@ -13,13 +14,14 @@ public class LoginTest extends BaseTest {
     private LoginPage logInPage = new LoginPage();
     private GeneralPage generalPage = new GeneralPage();
     private ChangePasswordPage changePasswordPage = new ChangePasswordPage();
+    private SoftAssert softAssert = new SoftAssert();
 
     @Test(description = "User can login Railway with valid username and password")
     public void TC01() {
         homePage.open();
         homePage.clickOnTabLogin();
         logInPage.login(Constant.Username, Constant.Password);
-        String actual = logInPage.showMessageWelcome();
+        String actual = logInPage.getTextMsgWelcome();
         String expected = "Welcome " + Constant.Username;
 
         Assert.assertEquals(actual, expected);
@@ -33,8 +35,8 @@ public class LoginTest extends BaseTest {
         homePage.clickOnTabLogin();
         logInPage.login("", Constant.Password);
 
-        Assert.assertEquals(logInPage.getTextMessageErrorLogin(), "There was a problem with your login and/or errors exist in your form.", "The error doesn't display properly");
-        Assert.assertEquals(logInPage.getTextMessageErrorValidField(), "You must specify a username.", "The error doesn't display properly");
+        Assert.assertEquals(logInPage.getTextMsgErrorLogin(), "There was a problem with your login and/or errors exist in your form.", "The error doesn't display properly");
+        Assert.assertEquals(logInPage.getTextMsgErrorInvalidField(), "You must specify a username.", "The error doesn't display properly");
     }
 
     @Test(description = "User cannot log into Railway with invalid password")
@@ -43,7 +45,7 @@ public class LoginTest extends BaseTest {
         homePage.clickOnTabLogin();
         logInPage.login(Constant.Username, "1231223123");
 
-        Assert.assertEquals(logInPage.getTextMessageErrorLogin(), "There was a problem with your login and/or errors exist in your form.", "The error doesn't display properly");
+        Assert.assertEquals(logInPage.getTextMsgErrorLogin(), "There was a problem with your login and/or errors exist in your form.", "The error doesn't display properly");
     }
 
     @Test(description = "Login page displays when un-logged User clicks on \"Book ticket\" tab")
@@ -62,7 +64,7 @@ public class LoginTest extends BaseTest {
         homePage.clickOnTabLogin();
         String password = "123123123";
         logInPage.loginWithInvalidAccountSeveralTimes(4, Constant.Username, password);
-        String actual = logInPage.getTextMessageErrorLogin();
+        String actual = logInPage.getTextMsgErrorLogin();
         String expected = "You have used 4 out of 5 login attempts. After all 5 have been used, you will be unable to login for 15 minutes.";
 
         Assert.assertEquals(actual, expected, "The error message doesn't display properly");
@@ -74,13 +76,14 @@ public class LoginTest extends BaseTest {
         homePage.clickOnTabLogin();
         logInPage.login(Constant.Username, Constant.Password);
 
-        Assert.assertTrue(generalPage.getChangePassword().isDisplayed());
-        Assert.assertTrue(generalPage.getTabLogout().isDisplayed());
-        Assert.assertTrue(generalPage.getTabMyTicket().isDisplayed());
+        softAssert.assertTrue(generalPage.getChangePassword().isDisplayed());
+        softAssert.assertTrue(generalPage.getTabLogout().isDisplayed());
+        softAssert.assertTrue(generalPage.getTabMyTicket().isDisplayed());
 
-        homePage.clickOnTabChangPassword();
+        homePage.clickOnTabChangePassword();
 
-        Assert.assertTrue(changePasswordPage.getLblTitleChangePassword().isDisplayed());
+        softAssert.assertTrue(changePasswordPage.getLblTitleChangePassword().isDisplayed());
+        softAssert.assertAll();
 
         homePage.clickOnTabLogout();
     }
@@ -91,6 +94,6 @@ public class LoginTest extends BaseTest {
         homePage.clickOnTabLogin();
         logInPage.login("namdayne@gmail.com", "123123123");
 
-        Assert.assertEquals(logInPage.getTextMessageErrorLogin(), "Invalid username or password. Please try again.", "The error message doesn't display properly");
+        Assert.assertEquals(logInPage.getTextMsgErrorLogin(), "Invalid username or password. Please try again.", "The error message doesn't display properly");
     }
 }
